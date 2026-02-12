@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.venv/
+
+# OS junk
+.DS_Store
+
+# Model files (optional)
+*.pkl
+*.joblib
+
+# Data files (if large/private)
+data/
+*.csv

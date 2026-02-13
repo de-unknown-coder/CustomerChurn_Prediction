@@ -65,6 +65,7 @@ ROC-AUC = 0.836
 
 ## Selecting an Optimal Threshold
 ![ROC Curve](assets/roc_curve.png)
+
 Instead of using the default threshold (0.5), we selected a threshold using Youden’s J statistic:
 
 J=TPR−FPR

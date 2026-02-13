@@ -65,6 +65,7 @@ def main():
     plt.title("ROC Curve")
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
+    plt.savefig("roc_curve.png")  # 👈 saves image
     plt.show()
 
 

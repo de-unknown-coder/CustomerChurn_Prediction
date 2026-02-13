@@ -3,15 +3,19 @@ from pydantic import BaseModel
 
 import joblib
 import pandas as pd
+import json
 
 app = FastAPI(title="Churn Prediction API")
 
-# Load saved artifacts
+# Load artifacts
 model = joblib.load("models/churn_model.joblib")
 preprocessor = joblib.load("models/preprocessor.joblib")
 
+# Load tuned threshold
+with open("models/threshold.json") as f:
+    THRESHOLD = json.load(f)["threshold"]
 
-# ---- Input Schema ----
+
 class CustomerInput(BaseModel):
     gender: str
     SeniorCitizen: int
@@ -46,17 +50,17 @@ def home():
 
 @app.post("/predict")
 def predict(data: CustomerInput):
-    # Convert input to DataFrame
     df = pd.DataFrame([data.dict()])
-
-    # Transform with saved preprocessor
     X = preprocessor.transform(df)
 
-    # Predict
-    pred = model.predict(X)[0]
+    # Probability of churn (Yes)
     prob = model.predict_proba(X)[0][1]
+
+    # Apply tuned threshold
+    pred = "Yes" if prob >= THRESHOLD else "No"
 
     return {
         "churn": pred,
-        "probability": round(float(prob), 3)
+        "probability": round(float(prob), 3),
+        "threshold_used": round(float(THRESHOLD), 3)
     }

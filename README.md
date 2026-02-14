@@ -64,7 +64,16 @@ source venv/bin/activate   # for Linux/Mac
 venv\Scripts\activate      # for Windows
 pip install -r requirements.txt
 ```
----
+
+## Dataset
+
+This project uses the **Telco Customer Churn Dataset** from IBM.
+
+Source:  
+https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+
+It contains ~7,000 customer records with demographic, billing, and service usage features.
+
 
 After installation:
 

@@ -74,9 +74,9 @@ python src/evaluate.py
 This generates:
 
 ROC curve plot
+![ROC Curve](assets/roc_curve.png)
 
-
-threshold.json for deployment
+Threshold.json for deployment
 Add:
 
 ```md
@@ -141,8 +141,6 @@ We can choose a better threshold (example: 0.7) depending on the tradeoff betwee
  - avoiding false alarms (low false positives)
 
 ## ROC Curve
-![ROC Curve](assets/roc_curve.png)
-
 We evaluated the model using the ROC curve, which plots:
 
 >TPR (True Positive Rate / Recall)

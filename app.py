@@ -8,11 +8,21 @@ import json
 app = FastAPI(title="Churn Prediction API")
 
 # Load artifacts
-model = joblib.load("models/churn_model.joblib")
-preprocessor = joblib.load("models/preprocessor.joblib")
+import os
 
-# Load tuned threshold
-with open("models/threshold.json") as f:
+# Absolute base directory of this file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Correct absolute paths
+MODEL_PATH = os.path.join(BASE_DIR, "models", "churn_model.joblib")
+PREPROCESSOR_PATH = os.path.join(BASE_DIR, "models", "preprocessor.joblib")
+THRESHOLD_PATH = os.path.join(BASE_DIR, "models", "threshold.json")
+
+# Load artifacts safely
+model = joblib.load(MODEL_PATH)
+preprocessor = joblib.load(PREPROCESSOR_PATH)
+
+with open(THRESHOLD_PATH) as f:
     THRESHOLD = json.load(f)["threshold"]
 
 

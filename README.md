@@ -19,25 +19,39 @@ The goal of this project is not complex engineering, but strong fundamentals in 
 
 ---
 ## Project Structure
+## Project Structure
 
 ```text
 CustomerChurn_Prediction/
 │
-├── app.py # FastAPI server
+├── app.py                  # FastAPI inference server
+├── requirements.txt
+├── README.md
+│
 ├── src/
-│ ├── train.py # Train model
-│ ├── evaluate.py # ROC + threshold tuning
-│ └── preprocess.py # Cleaning + encoding
+│   ├── preprocess.py       # Data cleaning + encoding pipeline
+│   ├── train.py            # Model training script
+│   ├── evaluate.py         # ROC curve + threshold tuning
+│   └── infer.py            # Local prediction test
 │
 ├── models/
-│ ├── churn_model.joblib
-│ ├── preprocessor.joblib
-│ └── threshold.json
+│   ├── churn_model.joblib
+│   ├── preprocessor.joblib
+│   └── threshold.json
 │
-└── assets/
-└── roc_curve.png
+├── assets/
+│   └── roc_curve.png
+│
+├── examples/
+│   ├── sample_request.json
+│   └── sample_response.json
+│
+└── tests/
+    ├── test_preprocess.py
+    ├── test_model.py
+    └── test_api.py
 ```
----
+
 ## Installation
 
 Clone the repo:
@@ -111,7 +125,15 @@ Example Response
   "threshold_used": 0.239
 }
 ```
+## Example Request/Response Files
 
+Sample API payloads are provided in the `examples/` folder:
+
+- `examples/sample_request.json`
+- `examples/sample_response.json`
+
+You can use them directly in Postman or Swagger UI.
+---
 ## ROC Curve 
 We evaluated the model using the ROC curve, which plots:
     
@@ -136,6 +158,23 @@ Best threshold found:
 Threshold ≈ 0.239
 ---
 
+## Running Unit Tests
+
+Basic unit tests are included to validate:
+
+- preprocessing logic
+- model probability output
+- API availability
+
+Run all tests with:
+
+```bash
+pytest
+```
+Expected output:
+3 passed
+---
+
 ## Why ROC Curve
 
 ROC Curve shows how model performance changes across different thresholds.
@@ -144,8 +183,8 @@ AUC represents:
 > The probability that the model ranks a random positive sample higher than a random negative sample.
 
 This helps measure how well the classifier separates the two classes.
-
 ---
+
 ## Threshold Tuning (Business-Aware Classification)
 
 The churn model outputs a probability:
@@ -190,11 +229,9 @@ This is a business decision:
 ## Learning Objective
 
 This project is built as a fundamentals-focused step toward stronger machine learning understanding, especially for competitive exams and real-world ML work.
-
 ---
 ## Future Improvements
 
-- Add unit tests for preprocessing and API
 - Dockerize deployment
 - Deploy API on Render/AWS
 - Add monitoring for model drift

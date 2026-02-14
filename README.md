@@ -74,6 +74,7 @@ python src/evaluate.py
 This generates:
 
 ROC curve plot
+
 ![ROC Curve](assets/roc_curve.png)
 
 Threshold.json for deployment

@@ -36,7 +36,7 @@ CustomerChurn_Prediction/
 │
 └── assets/
 └── roc_curve.png
-...
+```
 ---
 ## Installation
 
@@ -46,8 +46,8 @@ Clone the repo:
 git clone https://github.com/de-unknown-coder/CustomerChurn_Prediction.git
 cd CustomerChurn_Prediction
 python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+source venv/bin/activate   # for Linux/Mac
+venv\Scripts\activate      # for Windows
 pip install -r requirements.txt
 ```
 ---

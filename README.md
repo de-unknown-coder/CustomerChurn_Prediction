@@ -19,6 +19,8 @@ The goal of this project is not complex engineering, but strong fundamentals in 
 
 ---
 ## Project Structure
+
+```text
 CustomerChurn_Prediction/
 │
 ├── app.py # FastAPI server
@@ -34,7 +36,7 @@ CustomerChurn_Prediction/
 │
 └── assets/
 └── roc_curve.png
-
+...
 ---
 ## Installation
 

@@ -1,6 +1,7 @@
-# Binary Classification Project (ROC-AUC + Threshold Selection)
+# Customer Churn Prediction API (ROC-AUC + Threshold Tuning)
 
 This repository contains a basic machine learning classification project built to understand and implement core evaluation concepts like **ROC Curve** and **AUC Score**.
+An end-to-end churn prediction system using Logistic Regression, deployed with FastAPI and threshold tuning based on ROC analysis.
 
 The goal of this project is not complex engineering, but strong fundamentals in how classification models are evaluated beyond simple accuracy.
 
@@ -17,7 +18,96 @@ The goal of this project is not complex engineering, but strong fundamentals in 
 - Threshold tuning instead of blindly using 0.5
 
 ---
+## Project Structure
+CustomerChurn_Prediction/
+│
+├── app.py # FastAPI server
+├── src/
+│ ├── train.py # Train model
+│ ├── evaluate.py # ROC + threshold tuning
+│ └── preprocess.py # Cleaning + encoding
+│
+├── models/
+│ ├── churn_model.joblib
+│ ├── preprocessor.joblib
+│ └── threshold.json
+│
+└── assets/
+└── roc_curve.png
 
+---
+## Installation
+
+Clone the repo:
+
+```bash
+git clone https://github.com/de-unknown-coder/CustomerChurn_Prediction.git
+cd CustomerChurn_Prediction
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+```
+---
+
+After installation:
+
+```md
+## Training the Model
+
+Run:
+
+```bash
+python src/train.py
+```
+
+Then:
+
+```md
+## ROC Evaluation + Threshold Selection
+
+Run:
+
+```bash
+python src/evaluate.py
+```
+This generates:
+
+ROC curve plot
+
+
+threshold.json for deployment
+Add:
+
+```md
+## FastAPI Deployment
+
+Start server:
+
+```bash
+uvicorn app:app --reload
+```
+Open Swagger UI:
+http://127.0.0.1:8000/docs
+
+```md
+## Example API Request
+
+```json
+{
+  "tenure": 60,
+  "Contract": "Two year",
+  "MonthlyCharges": 45.0,
+  "TotalCharges": 2700.0,
+  ...
+}
+Example Response
+{
+  "churn": "No",
+  "probability": 0.152,
+  "threshold_used": 0.239
+}
+```
 ## Why ROC-AUC?
 
 ROC Curve shows how model performance changes across different thresholds.
@@ -51,6 +141,7 @@ We can choose a better threshold (example: 0.7) depending on the tradeoff betwee
  - avoiding false alarms (low false positives)
 
 ## ROC Curve
+![ROC Curve](assets/roc_curve.png)
 
 We evaluated the model using the ROC curve, which plots:
 
@@ -62,9 +153,8 @@ We evaluated the model using the ROC curve, which plots:
 
 The ROC-AUC score achieved:
 ROC-AUC = 0.836
-
+---
 ## Selecting an Optimal Threshold
-![ROC Curve](assets/roc_curve.png)
 
 Instead of using the default threshold (0.5), we selected a threshold using Youden’s J statistic:
 
@@ -96,4 +186,12 @@ This is a business decision:
 ## Learning Objective
 
 This project is built as a fundamentals-focused step toward stronger machine learning understanding, especially for competitive exams and real-world ML work.
+
+---
+## Future Improvements
+
+- Add unit tests for preprocessing and API
+- Dockerize deployment
+- Deploy API on Render/AWS
+- Add monitoring for model drift
 

@@ -106,12 +106,37 @@ http://127.0.0.1:8000/docs
 }
 Example Response
 {
-  "churn": "No",
+    "churn": "No",
   "probability": 0.152,
   "threshold_used": 0.239
 }
 ```
-## Why ROC-AUC?
+
+## ROC Curve 
+We evaluated the model using the ROC curve, which plots:
+    
+>TPR (True Positive Rate / Recall)
+  Fraction of churners correctly identified
+    
+>FPR (False Positive Rate)
+  Fraction of non-churners incorrectly flagged
+    
+The ROC-AUC score achieved:
+ROC-AUC = 0.836
+---
+
+## Selecting an Optimal Threshold
+
+Instead of using the default threshold (0.5), we selected a threshold using Youden’s J statistic:
+
+J=TPR−FPR
+
+Best threshold found:
+
+Threshold ≈ 0.239
+---
+
+## Why ROC Curve
 
 ROC Curve shows how model performance changes across different thresholds.
 
@@ -142,28 +167,6 @@ threshold = 0.5
 We can choose a better threshold (example: 0.7) depending on the tradeoff between:
  - catching positives (high recall)
  - avoiding false alarms (low false positives)
-
-## ROC Curve
-We evaluated the model using the ROC curve, which plots:
-
->TPR (True Positive Rate / Recall)
- Fraction of churners correctly identified
-
->FPR (False Positive Rate)
- Fraction of non-churners incorrectly flagged
-
-The ROC-AUC score achieved:
-ROC-AUC = 0.836
----
-## Selecting an Optimal Threshold
-
-Instead of using the default threshold (0.5), we selected a threshold using Youden’s J statistic:
-
-J=TPR−FPR
-
-Best threshold found:
-
-Threshold ≈ 0.239
 
 ## Tradeoff: Recall vs Precision
 
